@@ -61,6 +61,7 @@ showhelp() {
   --redis                     Install Redis
   --memcached                 Install Memcached
   --phpmyadmin                Install phpMyAdmin
+  --adminer                   Install adminer
   --hhvm                      Install HHVM
   --ssh_port [22]             SSH port, default: 22
   --iptables                  Enable iptables
@@ -68,7 +69,7 @@ showhelp() {
   "
 }
 ARG_NUM=$#
-TEMP=`getopt -o hvV --long help,version,nginx_option:,apache_option:,php_option:,phpcache_option:,php_extensions:,tomcat_option:,jdk_option:,db_option:,dbrootpwd:,dbinstallmethod:,pureftpd,redis,memcached,phpmyadmin,hhvm,ssh_port:,iptables,reboot -- "$@" 2>/dev/null`
+TEMP=`getopt -o hvV --long help,version,nginx_option:,apache_option:,php_option:,phpcache_option:,php_extensions:,tomcat_option:,jdk_option:,db_option:,dbrootpwd:,dbinstallmethod:,pureftpd,redis,memcached,phpmyadmin,adminer,hhvm,ssh_port:,iptables,reboot -- "$@" 2>/dev/null`
 [ $? != 0 ] && echo "${CWARNING}ERROR: unknown argument! ${CEND}" && showhelp && exit 1
 eval set -- "${TEMP}"
 while :; do
@@ -164,6 +165,9 @@ while :; do
     --phpmyadmin)
       phpmyadmin_yn=y; shift 1
       [ -d "${wwwroot_dir}/default/phpMyAdmin" ] && { echo "${CWARNING}phpMyAdmin already installed! ${CEND}"; phpmyadmin_yn=Other; }
+      ;;
+    --adminer)
+      adminer_yn=y; shift 1
       ;;
     --hhvm)
       hhvm_yn=y; shift 1
@@ -620,6 +624,16 @@ if [ ${ARG_NUM} == 0 ]; then
     done
   fi
 
+  # check adminer
+  if [[ ${php_option} =~ ^[1-7]$ ]] || [ -e "${php_install_dir}/bin/phpize" ]; then
+    while :; do echo
+      read -p "Do you want to install Adminer? [y/n]: " adminer_yn
+      if [[ ! ${adminer_yn} =~ ^[y,n]$ ]]; then
+        echo "${CWARNING}input error! Please only input 'y' or 'n'${CEND}"
+      fi
+    done
+  fi
+
   # check redis
   while :; do echo
     read -p "Do you want to install redis? [y/n]: " redis_yn
@@ -950,7 +964,10 @@ fi
 if [ "${phpmyadmin_yn}" == 'y' ]; then
   . include/phpmyadmin.sh
   Install_phpMyAdmin 2>&1 | tee -a ${oneinstack_dir}/install.log
-  #adminer
+fi
+
+# adminer
+if [ "${adminer_yn}" == 'y' ]; then
    . include/adminer.sh
   Install_adminer 2>&1 | tee -a ${oneinstack_dir}/install.log
 fi
