@@ -96,6 +96,9 @@ mongo_pecl_ver=1.6.16
 phpmyadmin_ver=4.8.3
 phpmyadmin_oldver=4.4.15.10
 
+#adminer
+adminer_ver=4.6.3
+
 # jemalloc
 jemalloc_ver=5.1.0
 

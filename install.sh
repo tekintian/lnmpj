@@ -950,6 +950,9 @@ fi
 if [ "${phpmyadmin_yn}" == 'y' ]; then
   . include/phpmyadmin.sh
   Install_phpMyAdmin 2>&1 | tee -a ${oneinstack_dir}/install.log
+  #adminer
+   . include/adminer.sh
+  Install_adminer 2>&1 | tee -a ${oneinstack_dir}/install.log
 fi
 
 # redis
