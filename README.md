@@ -41,26 +41,26 @@
 	nginx.conf 配置文件中的PHP配置可选使用  
 	include phpXX.conf 的方式载入
 
-默认目录
+### 默认目录
 	网站默认目录 /home/wwwroot
 	备份目录 /home/backup
 	数据库文件目录 /home/data
 
-PHP端口
+### PHP端口
 	如果使用端口连接则 端口号为  90XX , 如  9070 表示为php7.0的版本
 
-系统环境
+### 系统环境
 系统环境中的PHP默认为最后一次安装的PHP版本，如需要调整，自行修改 /etc/profile 文件中的PATH变量为你想要的PHP版本即可
 
 
-addons.sh插件安装
+### addons.sh插件安装
 	如果是PHP插件，则默认的PHP版本为上次安装的PHP版本，如需要为其他版本安装PHP插件，则需要修改options.conf文件中相关的PHP版本号，即：
 ```conf
 	php_install_dir=/usr/local/php70
 	php_vn=70
 ```
 
-命令行修改 
+### 命令行修改 
 先加入{oneinstack_dir}目录后执行
 ```shell
 	sed -i 's@^php_install_dir=.*@php_install_dir=/usr/local/php70@' ./options.conf
@@ -68,6 +68,18 @@ addons.sh插件安装
 ```
 把上面命令中的70换成你需要的版本【53--72】
 {oneinstack_dir}为你的oneinstack的存放目录
+
+### pm注意事项
+
+	安装了多个PHP版本以后需要注意调整一下 不常用/使用量不大的 php-fpm.conf的配置参数，
+	根据个人的主机内存和CPU情况调整， 配置文件路径为 /usr/local/phpXX/etc/php-fpm.conf
+	小内存推荐吧不常用的PHP版本的PM调整为以下参数
+```conf
+pm.max_children = 21
+pm.start_servers = 6
+pm.min_spare_servers = 4
+pm.max_spare_servers = 21
+```
 
 
 # oneinstack
