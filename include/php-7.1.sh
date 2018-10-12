@@ -164,6 +164,9 @@ EOF
     # php-fpm Init Script
     /bin/cp sapi/fpm/init.d.php-fpm /etc/init.d/php71-fpm
     chmod +x /etc/init.d/php71-fpm
+    #fix the php-fpm init.d name
+    sed -i 's@ php-fpm$@ php71-fpm@g' /etc/init.d/php71-fpm
+    
     [ "${PM}" == 'yum' ] && { chkconfig --add php71-fpm; chkconfig php71-fpm on; }
     [ "${PM}" == 'apt' ] && update-rc.d php71-fpm defaults
 

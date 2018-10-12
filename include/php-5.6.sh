@@ -157,7 +157,10 @@ EOF
   if [[ ! ${apache_option} =~ ^[1-2]$ ]] && [ ! -e "${apache_install_dir}/bin/apxs" ]; then
     # php-fpm Init Script
     /bin/cp sapi/fpm/init.d.php-fpm /etc/init.d/php56-fpm
-    chmod +x /etc/init.d/php65-fpm
+    chmod +x /etc/init.d/php56-fpm
+    #fix the php-fpm init.d name
+    sed -i 's@ php-fpm$@ php56-fpm@g' /etc/init.d/php56-fpm
+
     [ "${PM}" == 'yum' ] && { chkconfig --add php56-fpm; chkconfig php56-fpm on; }
     [ "${PM}" == 'apt' ] && update-rc.d php56-fpm defaults
 

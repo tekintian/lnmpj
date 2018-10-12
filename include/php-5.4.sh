@@ -142,6 +142,9 @@ Install_PHP54() {
     # php-fpm Init Script
     /bin/cp sapi/fpm/init.d.php-fpm /etc/init.d/php54-fpm
     chmod +x /etc/init.d/php54-fpm
+    #fix the php-fpm init.d name
+    sed -i 's@ php-fpm$@ php54-fpm@g' /etc/init.d/php54-fpm
+    
     [ "${PM}" == 'yum' ] && { chkconfig --add php54-fpm; chkconfig php54-fpm on; }
     [ "${PM}" == 'apt' ] && update-rc.d php54-fpm defaults
 

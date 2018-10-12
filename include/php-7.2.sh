@@ -158,6 +158,9 @@ EOF
     # php72-fpm Init Script
     /bin/cp sapi/fpm/init.d.php-fpm /etc/init.d/php72-fpm
     chmod +x /etc/init.d/php72-fpm
+    #fix the php-fpm init.d name
+    sed -i 's@ php-fpm$@ php72-fpm@g' /etc/init.d/php72-fpm
+    
     [ "${PM}" == 'yum' ] && { chkconfig --add php72-fpm; chkconfig php72-fpm on; }
     [ "${PM}" == 'apt' ] && update-rc.d php72-fpm defaults
 

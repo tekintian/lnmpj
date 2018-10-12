@@ -155,6 +155,9 @@ EOF
     # php-fpm Init Script
     /bin/cp sapi/fpm/init.d.php-fpm /etc/init.d/php55-fpm
     chmod +x /etc/init.d/php55-fpm
+    #fix the php-fpm init.d name
+    sed -i 's@ php-fpm$@ php55-fpm@g' /etc/init.d/php55-fpm
+    
     [ "${PM}" == 'yum' ] && { chkconfig --add php55-fpm; chkconfig php55-fpm on; }
     [ "${PM}" == 'apt' ] && update-rc.d php55-fpm defaults
 

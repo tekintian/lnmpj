@@ -148,6 +148,9 @@ Install_PHP53() {
     # php-fpm Init Script
     /bin/cp sapi/fpm/init.d.php-fpm /etc/init.d/php53-fpm
     chmod +x /etc/init.d/php53-fpm
+    #fix the php-fpm init.d name
+    sed -i 's@ php-fpm$@ php53-fpm@g' /etc/init.d/php53-fpm
+    
     [ "${PM}" == 'yum' ] && { chkconfig --add php53-fpm; chkconfig php53-fpm on; }
     [ "${PM}" == 'apt' ] && update-rc.d php53-fpm defaults
 
