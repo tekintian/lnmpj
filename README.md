@@ -14,6 +14,7 @@
 - 第二次安装另外的PHP版本，直接选择下面需要安装的命令即可
 
 ```shell
+
 	#PHP5.3安装
 	./install.sh --php_option 1 --phpcache_option 1 --php_extensions zendguardloader,imagick,gmagick,memcached,memcache,redis
 

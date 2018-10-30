@@ -1,0 +1,7 @@
+<Host name="localhost" appBase="/home/wwwroot/default" unpackWARs="true" autoDeploy="true">
+  <Context path="" docBase="/home/wwwroot/default" reloadable="false" crossContext="true"/>
+  <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
+    prefix="localhost_access_log" suffix=".txt" pattern="%h %l %u %t &quot;%r&quot; %s %b" />
+  <Valve className="org.apache.catalina.valves.RemoteIpValve" remoteIpHeader="X-Forwarded-For"
+    protocolHeader="X-Forwarded-Proto" protocolHeaderHttpsValue="https"/>
+</Host>
