@@ -97,6 +97,11 @@ pm.max_spare_servers = 21
 [Installing on Debian](http://www.webmin.com/deb.html)
 [Installing the RPM]http://www.webmin.com/rpm.html)
 
+安装后的配置文件目录
+/etc/webmin/miniserv.conf
+
+默认访问地址：https://ip:10000/
+
 
 # oneinstack
 [![PayPal donate button](https://img.shields.io/badge/paypal-donate-green.svg)](https://paypal.me/yeho) [![支付宝捐助按钮](https://img.shields.io/badge/%E6%94%AF%E4%BB%98%E5%AE%9D-%E5%90%91TA%E6%8D%90%E5%8A%A9-green.svg)](https://static.oneinstack.com/images/alipay.png) [![微信捐助按钮](https://img.shields.io/badge/%E5%BE%AE%E4%BF%A1-%E5%90%91TA%E6%8D%90%E5%8A%A9-green.svg)](https://static.oneinstack.com/images/weixin.png)

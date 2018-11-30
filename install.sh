@@ -630,9 +630,13 @@ if [ ${ARG_NUM} == 0 ]; then
       read -p "Do you want to install Adminer? [y/n]: " adminer_yn
       if [[ ! ${adminer_yn} =~ ^[y,n]$ ]]; then
         echo "${CWARNING}input error! Please only input 'y' or 'n'${CEND}"
+      else
+        [ "${adminer_yn}" == 'y' -a -d "${wwwroot_dir}/default/adminer.php" ] && { echo "${CWARNING}adminer.php already installed! ${CEND}"; adminer_yn=Other; }
+        break
       fi
     done
   fi
+
 
   # check redis
   while :; do echo
@@ -964,12 +968,6 @@ fi
 if [ "${phpmyadmin_yn}" == 'y' ]; then
   . include/phpmyadmin.sh
   Install_phpMyAdmin 2>&1 | tee -a ${oneinstack_dir}/install.log
-fi
-
-# adminer
-if [ "${adminer_yn}" == 'y' ]; then
-   . include/adminer.sh
-  Install_adminer 2>&1 | tee -a ${oneinstack_dir}/install.log
 fi
 
 # redis
